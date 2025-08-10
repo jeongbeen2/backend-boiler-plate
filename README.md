@@ -1,4 +1,4 @@
-# Backend Boilerplate
+# Backend boiler-plate
 
 TypeScript + Express + Prisma + PostgreSQL + Docker로 구성된 백엔드 보일러플레이트입니다.
 
