@@ -19,7 +19,7 @@
     "postinstall": "prisma generate || true"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "node --loader ts-node/esm prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.18.0",

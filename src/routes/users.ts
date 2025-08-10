@@ -1,9 +1,9 @@
-import { Router } from 'express'
+import { Router, Request, Response, NextFunction } from 'express'
 import prisma from '../lib/prisma'
 
 const router = Router()
 
-router.get('/', async (_req, res, next) => {
+router.get('/', async (_req: Request, res: Response, next: NextFunction) => {
   try {
     const users = await prisma.user.findMany({ orderBy: { id: 'asc' } })
     res.json(users)
@@ -12,7 +12,7 @@ router.get('/', async (_req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { email, name } = req.body as { email: string; name?: string | null }
     const user = await prisma.user.create({
@@ -25,5 +25,3 @@ router.post('/', async (req, res, next) => {
 })
 
 export default router
-
-
