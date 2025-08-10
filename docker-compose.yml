@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.8"
 services:
   db:
     image: postgres:16-alpine
@@ -10,25 +10,18 @@ services:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d app"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
 
   api:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     environment:
       NODE_ENV: development
       PORT: 8000
       DATABASE_URL: postgresql://postgres:postgres@db:5432/app?schema=public
+      RUN_SEED: "true"
     ports:
       - "8000:8000"
     depends_on:
-      db:
-        condition: service_healthy
+      - db
 
 volumes:
   db_data:
